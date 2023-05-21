@@ -1,0 +1,139 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/factory/containers/protos/WoodenBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.14543487198213545 0.20514425985113693 0.9678659673021204 1.2644028678247374
+  position -1.456291583865235 -3.805249187002919 1.5480110823614792
+}
+WoodenBox {
+  translation 0.4999995307198348 0.550000003263961 0.08960758812947417
+  rotation -0.9999999999847722 -4.998431831382216e-06 2.3390697264299605e-06 2.1775724055353395e-08
+  size 0.2 0.2 0.2
+  mass 1
+}
+E-puck {
+  hidden linearVelocity_0 0.011353455277508686 0.0057487843547833406 -1.2012502376515644e-08
+  hidden angularVelocity_0 -0.004997317958164515 0.009869362941398731 3.357736080405282e-11
+  hidden translation_1 0 0.02600000000000007 0.02
+  hidden rotation_1 0 0.9999999999999999 0 3.593330987947901
+  hidden linearVelocity_1 0.01140280173515609 0.0057737707635256074 -1.2250183090017447e-10
+  hidden angularVelocity_1 -0.2886885392031857 0.5701400930194942 6.665396737237894e-09
+  hidden translation_2 0 -0.02600000000000003 0.02
+  hidden rotation_2 0 0.9999999999999999 0 5.148441703763696
+  hidden linearVelocity_2 0.011402801757472634 0.005773770775330629 -1.7655850115176858e-10
+  hidden angularVelocity_2 -0.2886885426289296 0.5701400912859514 -3.164340428700005e-08
+  translation 0.6688825291755233 0.2095721174157225 -0.010063967452282023
+  rotation -2.5250156882413446e-05 0.00010557822443544738 0.9999999941078339 0.46871205433072666
+  controller "front_command"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0.05 0 -0.01
+  rotation 0.0040869685626383784 9.589706627359362e-09 -0.9999916483091087 -5.307179586466759e-06
+  floorSize 1.5 1.5
+  floorTileSize 0.25 0.25
+  wallHeight 0.2
+}
+WoodenBox {
+  translation -0.5099996248525167 -1.7586258875744863e-05 0.08960760005939898
+  rotation -0.00045648660428427565 8.616405411499499e-09 0.9999998958099845 4.770277180577527e-05
+  name "wooden box(2)"
+  size 0.2 0.2 0.2
+  mass 1
+}
+WoodenBox {
+  translation 0.49999999999998607 -0.5299999971710596 0.08960761155491706
+  rotation -0.9999999999875087 -4.998269441564644e-06 -1.725498508288922e-09 2.1775724084976966e-08
+  name "wooden box(1)"
+  size 0.2 0.2 0.2
+  mass 1
+}
+Robot {
+  children [
+    DistanceSensor {
+      translation 0.02 0 0.01
+      rotation 0 1 0 -1.27
+      children [
+        DEF sensor Shape {
+          appearance PBRAppearance {
+            metalness 0
+          }
+          geometry Box {
+            size 0.1 0.1 0.1
+          }
+        }
+      ]
+      name "ds_left"
+      boundingObject USE sensor
+      physics Physics {
+      }
+    }
+    DistanceSensor {
+      translation -0.02 0 0.01
+      rotation 0 1 0 -1.87
+      children [
+        DEF sensor Shape {
+          appearance PBRAppearance {
+            metalness 0
+          }
+          geometry Box {
+            size 0.1 0.1 0.1
+          }
+        }
+      ]
+      name "ds_right"
+      boundingObject USE sensor
+      physics Physics {
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.06 0 0.05
+      }
+      device [
+        RotationalMotor {
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 0 0.05
+        rotation 0 0 1 1.57
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+            }
+            geometry Cylinder {
+              height 0.2
+              radius 0.04
+            }
+          }
+        ]
+        boundingObject USE wheel
+        physics DEF Physics_wh Physics {
+        }
+      }
+    }
+    DEF Body Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 0
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.05 0.2
+      }
+    }
+  ]
+  boundingObject USE Body
+  physics Physics {
+  }
+  controller "obstacle_avoidance"
+}

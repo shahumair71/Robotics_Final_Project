@@ -1,0 +1,221 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/factory/containers/protos/WoodenBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.22737162152937274 0.19905552230797743 0.953246581300873 1.7507140222054782
+  position 0.7926426657382619 -3.0545341567848343 1.3810743732228425
+}
+WoodenBox {
+  translation 0.4999995307198348 0.5500000032644877 0.08960758807045466
+  rotation -0.9999999999847726 -4.999606513753071e-06 2.3363640102753085e-06 2.1775724051090136e-08
+  size 0.2 0.2 0.2
+  mass 1
+}
+E-puck {
+  hidden position_0_0 539.8339580197644
+  hidden position_0_1 667.0527748791604
+  hidden linearVelocity_0 0.011347855278990095 0.005745948745478229 -2.7041907865546618e-08
+  hidden angularVelocity_0 -0.004808289318989781 0.009496041468910837 -1.5091625806946072e-09
+  hidden rotation_1 0 -1 0 0.5199783976800417
+  hidden linearVelocity_1 0.011395335295072806 0.005769990095082478 -1.540687577510776e-10
+  hidden angularVelocity_1 -0.28849950697273596 0.5697667733628701 6.48688082454638e-09
+  hidden rotation_2 0 1 0 1.0351323181242718
+  hidden linearVelocity_2 0.011395335233454387 0.005769990064183381 -1.3879706273116921e-10
+  hidden angularVelocity_2 -0.2884995103844194 0.5697667716322813 -3.173108706054982e-08
+  translation 0.37126671699016794 0.05887534162182507 -0.010063963495091909
+  rotation 0.00012103920938592321 -0.0005071496736299534 0.9999998640743498 0.46871210662898377
+  controller "front_command"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0.05 0 -0.01
+  rotation 0.0040869685626383784 9.589706627359362e-09 -0.9999916483091087 -5.307179586466759e-06
+  floorSize 1.5 1.5
+  floorTileSize 0.25 0.25
+  wallHeight 0.2
+}
+WoodenBox {
+  translation -0.5099996248525167 -1.7586258343281183e-05 0.08960760000037851
+  rotation -0.000456487604260026 8.605794083391942e-09 0.9999998958095282 4.7702771805716314e-05
+  name "wooden box(2)"
+  size 0.2 0.2 0.2
+  mass 1
+}
+WoodenBox {
+  translation 0.49999999999998607 -0.5299999971705329 0.08960761149595282
+  rotation -0.9999999999875068 -4.998661000054259e-06 -4.149929201424118e-09 2.1775724093503518e-08
+  name "wooden box(1)"
+  size 0.2 0.2 0.2
+  mass 1
+}
+Robot {
+  translation -8.7139287768554e-15 3.948058392561071e-05 0.029988778144260524
+  rotation -1 -1.1011527615028203e-10 -4.7672008979520134e-14 0.0009867552891106917
+  children [
+    DEF Body Transform {
+      translation 0 0.04 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.4 0 0.3
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.075
+            radius 0.04
+          }
+        }
+      ]
+    }
+    DEF compass Group {
+      children [
+        Transform {
+          translation 0 0.0775 0.011
+          rotation 0.7071067811865475 0 0.7071067811865475 1.57
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.7 0 0
+                metalness 0
+              }
+              geometry Cone {
+                bottomRadius 0.016
+                height 0.05
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.0775 -0.02
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+                metalness 0
+              }
+              geometry Capsule {
+                height 0.001
+                radius 0.017
+              }
+            }
+          ]
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 1.761974163831205e-08
+        anchor 0 0.02 0
+      }
+      device [
+        DEF left_motor RotationalMotor {
+        }
+      ]
+      endPoint DEF left_wheel Solid {
+        translation 0 0 -3.52394832766241e-10
+        rotation 1 0 0 0
+        children [
+          DEF LEFTWHEEL Transform {
+            translation 0.0425 0.02 0
+            rotation 0 0 1 1.5708
+            children [
+              DEF WHEELSHAPE Shape {
+                appearance PBRAppearance {
+                  baseColor 1 0 0
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.08
+                  radius 0.02
+                }
+              }
+            ]
+          }
+        ]
+        boundingObject USE LEFTWHEEL
+        physics Physics {
+          density -1
+          mass 0.05
+        }
+        linearVelocity 1.2282783801230362e-10 2.293655719562225e-08 8.704490647992338e-06
+        angularVelocity -5.734077320705547e-07 -1.4324101626774849e-11 -4.4858042449747964e-14
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 1.761974177591456e-08
+        anchor 0 0.02 0
+      }
+      device [
+        DEF Right_motor RotationalMotor {
+        }
+      ]
+      endPoint Solid {
+        translation 0 0 -3.523948355182912e-10
+        rotation 1 0 0 0
+        children [
+          DEF RIGHT_WHEEL Transform {
+            translation -0.0425 0.02 0
+            rotation 0 0 1 1.57
+            children [
+              USE WHEELSHAPE
+            ]
+          }
+        ]
+        name "right wheel"
+        boundingObject USE RIGHT_WHEEL
+        physics Physics {
+          density -1
+          mass 0.05
+        }
+        linearVelocity -1.228278569316306e-10 2.2936557117286343e-08 8.704490647860548e-06
+        angularVelocity -5.734077282094038e-07 1.4326294139353596e-11 4.6756086656229663e-14
+      }
+    }
+    RangeFinder {
+      translation 0 0.035 0.04
+      rotation 1 0 0 1.57
+      children [
+        DEF RANGEFINDER Transform {
+          rotation 1 0 0 1.57
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.001
+                radius 0.002
+              }
+            }
+          ]
+        }
+      ]
+      name "range finder"
+      boundingObject USE RANGEFINDER
+      fieldOfView 1.5
+      width 300
+      height 200
+    }
+  ]
+  boundingObject USE Body
+  physics Physics {
+    mass 0.05
+  }
+  controllerArgs [
+    ""
+  ]
+  linearVelocity -2.958570888278256e-17 2.2919819865269168e-08 8.688476414022184e-06
+  angularVelocity -7.896140208509377e-07 -3.833790300432982e-15 9.434463353461246e-16
+}
